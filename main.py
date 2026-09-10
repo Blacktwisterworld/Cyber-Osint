@@ -156,8 +156,7 @@ def handle_api_request(message):
                               message_id=loading_msg.message_id,
                               parse_mode='Markdown')
 
-# Setup the webhook route exactly matching the bot token
-@app.route(f'/{BOT_TOKEN}', methods=['POST'])
+@app.route('/' + BOT_TOKEN, methods=['POST'])
 def getMessage():
     try:
         json_string = request.get_data().decode('utf-8')
@@ -166,8 +165,10 @@ def getMessage():
         bot.process_new_updates([update])
         return "!", 200
     except Exception as e:
+        import traceback
         print(f"Error processing update: {e}")
-        return "Error", 500
+        traceback.print_exc()
+        return "!", 200 # Return 200 anyway so Telegram stops retrying and blocking the queue
 
 @app.route('/')
 def index():
