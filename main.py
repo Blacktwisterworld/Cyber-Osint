@@ -76,9 +76,13 @@ def send_welcome(message):
             f"👨‍💻🧠 *Mastermind / Core Developer:* Cyber Insight 💎\n"
             f"👑🔥 *Absolute Creator & Overlord:* Monu (Devid) 🚀🏆\n"
             f"━━━━━━━━━━━━━━━━━━━━\n\n"
-            f"⏳ >_ Awaiting your next command, Monu... ⌨️💭"
+            f"⏳ \\>\\_ Awaiting your next command, Monu... ⌨️💭"
         )
-        bot.reply_to(message, admin_text, parse_mode='Markdown')
+        try:
+            bot.reply_to(message, admin_text, parse_mode='Markdown')
+        except Exception as e:
+            # Fallback without markdown if parsing fails
+            bot.reply_to(message, admin_text)
     else:
         scary_text = (
             f"🛑🚨 *CRITICAL WARNING: UNAUTHORIZED ACCESS DETECTED* 🚨🛑\n\n"
@@ -90,7 +94,10 @@ def send_welcome(message):
             f"He is not someone you want to mess with. 🚫👹 Trespassers are dealt with severely. ☠️🩸\n\n"
             f"⚠️🔥 *LEAVE IMMEDIATELY BEFORE DEFENSIVE PROTOCOLS ARE ENGAGED AGAINST YOUR DEVICE.* 🔥⚠️"
         )
-        bot.reply_to(message, scary_text, parse_mode='Markdown')
+        try:
+            bot.reply_to(message, scary_text, parse_mode='Markdown')
+        except Exception as e:
+            bot.reply_to(message, scary_text)
 
 # Helper function to format JSON beautifully
 def format_json_response(data):
