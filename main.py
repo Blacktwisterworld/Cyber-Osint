@@ -156,7 +156,7 @@ def handle_api_request(message):
                               message_id=loading_msg.message_id,
                               parse_mode='Markdown')
 
-@app.route('/' + BOT_TOKEN, methods=['POST'])
+@app.route(f'/{BOT_TOKEN}', methods=['POST'])
 def getMessage():
     try:
         json_string = request.get_data().decode('utf-8')
