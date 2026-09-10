@@ -188,7 +188,7 @@ def setup_webhook():
     success = bot.set_webhook(url=webhook_target)
     
     if success:
-        return f"Webhook successfully configured to target: {webhook_target}", 200
+        return f"Bot is ready for use", 200
     else:
         return "Failed to set Webhook.", 500
 
