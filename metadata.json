@@ -1,0 +1,6 @@
+{
+  "name": "Python Web Service Builder",
+  "description": "A workspace to generate Python-based dynamic web services for Render.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
