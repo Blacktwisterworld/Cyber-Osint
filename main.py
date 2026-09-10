@@ -42,7 +42,7 @@ API_CONFIGS = {
     }
 }
 
-bot = telebot.TeleBot(BOT_TOKEN)
+bot = telebot.TeleBot(BOT_TOKEN, threaded=False)
 app = Flask(__name__)
 
 # Security check function
@@ -156,10 +156,12 @@ def handle_api_request(message):
                               message_id=loading_msg.message_id,
                               parse_mode='Markdown')
 
+# Setup the webhook route exactly matching the bot token
 @app.route(f'/{BOT_TOKEN}', methods=['POST'])
 def getMessage():
     try:
         json_string = request.get_data().decode('utf-8')
+        print(f"Received update from Telegram: {json_string}")
         update = telebot.types.Update.de_json(json_string)
         bot.process_new_updates([update])
         return "!", 200
@@ -177,18 +179,22 @@ def setup_webhook():
     # Try to get the URL from the request if the environment variable isn't set
     base_url = WEBHOOK_URL
     if not base_url:
-        # e.g., https://cyber-osint-jsy2.onrender.com
+        # e.g., https://cyber-osint-8fqp.onrender.com
         base_url = request.url_root.rstrip('/')
         
     if not base_url or 'localhost' in base_url or '127.0.0.1' in base_url:
         return "Cannot determine valid external URL for webhook.", 400
     
     bot.remove_webhook()
+    
+    # Ensure no double slashes before the token
+    base_url = base_url.rstrip('/')
     webhook_target = f"{base_url}/{BOT_TOKEN}"
+    
     success = bot.set_webhook(url=webhook_target)
     
     if success:
-        return f"Bot is ready for use", 200
+        return f"Bot is ready for use. Webhook securely locked to: {webhook_target}", 200
     else:
         return "Failed to set Webhook.", 500
 
