@@ -47,11 +47,13 @@ app = Flask(__name__)
 
 # Security check function
 def is_admin(message):
-    return str(message.chat.id) == ADMIN_CHAT_ID
+    print(f"Checking if user {message.chat.id} is admin (Target: {ADMIN_CHAT_ID})")
+    return str(message.chat.id) == str(ADMIN_CHAT_ID).strip()
 
 # Basic /start command handler
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
+    print(f"Received /start or /help command from {message.chat.id}")
     if is_admin(message):
         admin_text = (
             f"☠️🔥 *SYSTEM OVERRIDE: ACCESS GRANTED* 🔥☠️\n\n"
@@ -159,16 +161,25 @@ def handle_api_request(message):
 @app.route('/' + BOT_TOKEN, methods=['POST'])
 def getMessage():
     try:
-        json_string = request.get_data().decode('utf-8')
-        print(f"Received update from Telegram: {json_string}")
-        update = telebot.types.Update.de_json(json_string)
+        raw_data = request.get_data().decode('utf-8')
+        print(f"RAW TELEGRAM DATA: {raw_data}")
+        
+        update = telebot.types.Update.de_json(raw_data)
         bot.process_new_updates([update])
-        return "!", 200
+        return "OK", 200
     except Exception as e:
         import traceback
         print(f"Error processing update: {e}")
         traceback.print_exc()
-        return "!", 200 # Return 200 anyway so Telegram stops retrying and blocking the queue
+        return "OK", 200
+
+# Catch-all route just in case Telegram is hitting something else
+@app.route('/<path:path>', methods=['POST'])
+def catch_all_post(path):
+    print(f"RECEIVED POST REQUEST ON UNKNOWN PATH: {path}")
+    raw_data = request.get_data().decode('utf-8')
+    print(f"RAW DATA ON {path}: {raw_data}")
+    return "OK", 200
 
 @app.route('/')
 def index():
