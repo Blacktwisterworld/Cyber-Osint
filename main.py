@@ -8,8 +8,9 @@ import telebot
 BOT_TOKEN = "8274980094:AAFOCAHI_9c1JykEFqkh2ftDoDPNKYaOU4A"
 ADMIN_CHAT_ID = "7236183825"
 
-# Webhook URL provided by Render
+# Get environment variables (If not set, we'll try to get it from the request later)
 WEBHOOK_URL = os.environ.get('RENDER_EXTERNAL_URL')
+
 
 # Define your 5 API URLs and their respective query parameters
 API_CONFIGS = {
@@ -173,11 +174,17 @@ def index():
 # Endpoint to manually set the webhook ONE TIME
 @app.route('/setup_webhook')
 def setup_webhook():
-    if not WEBHOOK_URL:
-        return "RENDER_EXTERNAL_URL is missing. Cannot set webhook.", 400
+    # Try to get the URL from the request if the environment variable isn't set
+    base_url = WEBHOOK_URL
+    if not base_url:
+        # e.g., https://cyber-osint-jsy2.onrender.com
+        base_url = request.url_root.rstrip('/')
+        
+    if not base_url or 'localhost' in base_url or '127.0.0.1' in base_url:
+        return "Cannot determine valid external URL for webhook.", 400
     
     bot.remove_webhook()
-    webhook_target = f"{WEBHOOK_URL}/{BOT_TOKEN}"
+    webhook_target = f"{base_url}/{BOT_TOKEN}"
     success = bot.set_webhook(url=webhook_target)
     
     if success:
