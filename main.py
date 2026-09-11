@@ -36,8 +36,8 @@ API_CONFIGS = {
         'desc': 'Instagram Profile Info'
     },
     'vehicle': {
-        'url': os.environ.get('API_VEHICLE_URL', 'https://vehicle-full-info.vercel.app/'),
-        'param_name': 'vehicle_number',
+        'url': os.environ.get('API_VEHICLE_URL', 'https://vehicle-full-info.vercel.app/vehicle_number='),
+        'param_name': 'path_append',  # Custom flag to indicate this API needs URL appending
         'desc': 'Vehicle Number Plate Lookup'
     }
 }
@@ -132,27 +132,55 @@ def handle_api_request(message):
     
     try:
         # Build query parameters dynamically based on the specific API requirement
-        params = {config['param_name']: query_text}
+        if config['param_name'] == 'path_append':
+            api_url = config['url'] + query_text
+            params = {}
+        else:
+            api_url = config['url']
+            params = {config['param_name']: query_text}
         
         # Add any extra params if they exist (like the 'key=Anurag' for FF API)
         if 'extra_params' in config:
             params.update(config['extra_params'])
             
-        response = requests.get(config['url'], params=params, timeout=15)
+        response = requests.get(api_url, params=params, timeout=15)
         
         if response.status_code == 200:
             try:
                 data = response.json()
                 result_text = format_json_response(data)
-                bot.edit_message_text(f"✅ *Target Extracted ({config['desc']}):*\n\n{result_text}", 
-                                      chat_id=message.chat.id, 
-                                      message_id=loading_msg.message_id,
-                                      parse_mode='Markdown')
+                full_text = f"✅ *Target Extracted ({config['desc']}):*\n\n{result_text}"
+                
+                if len(full_text) > 4000:
+                    bot.edit_message_text(f"✅ *Target Extracted ({config['desc']}):*\n\n⚠️ Data is too large for a single message. Sending as a file... 📁", 
+                                          chat_id=message.chat.id, 
+                                          message_id=loading_msg.message_id,
+                                          parse_mode='Markdown')
+                    import io
+                    file_data = io.BytesIO(json.dumps(data, indent=2, ensure_ascii=False).encode('utf-8'))
+                    file_data.name = f"{command_name}_{query_text}.json"
+                    bot.send_document(chat_id=message.chat.id, document=file_data)
+                else:
+                    bot.edit_message_text(full_text, 
+                                          chat_id=message.chat.id, 
+                                          message_id=loading_msg.message_id,
+                                          parse_mode='Markdown')
             except ValueError:
-                bot.edit_message_text(f"✅ *Raw Data Extracted ({config['desc']}):*\n\n`{response.text}`", 
-                                      chat_id=message.chat.id, 
-                                      message_id=loading_msg.message_id,
-                                      parse_mode='Markdown')
+                raw_text = f"✅ *Raw Data Extracted ({config['desc']}):*\n\n`{response.text}`"
+                if len(raw_text) > 4000:
+                    bot.edit_message_text(f"✅ *Raw Data Extracted ({config['desc']}):*\n\n⚠️ Data is too large. Sending as a file... 📁", 
+                                          chat_id=message.chat.id, 
+                                          message_id=loading_msg.message_id,
+                                          parse_mode='Markdown')
+                    import io
+                    file_data = io.BytesIO(response.text.encode('utf-8'))
+                    file_data.name = f"{command_name}_{query_text}.txt"
+                    bot.send_document(chat_id=message.chat.id, document=file_data)
+                else:
+                    bot.edit_message_text(raw_text, 
+                                          chat_id=message.chat.id, 
+                                          message_id=loading_msg.message_id,
+                                          parse_mode='Markdown')
         else:
             bot.edit_message_text(f"❌ *API Error:* Status Code `{response.status_code}`\n\nResponse: {response.text}",
                                   chat_id=message.chat.id, 
