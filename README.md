@@ -1,128 +1,222 @@
-# Cyber OSINT Telegram Bot
+<div align="center">
 
-A Telegram-based OSINT utility bot for authorized information lookup and
-research.
+# ☠️ CYBER OSINT
 
-## Features
+### `CYBER INSIGHT`
 
--   Telegram bot interface
--   Admin-controlled access
--   Multiple lookup commands
--   JSON/text API response handling
--   Automatic handling of large responses
--   Webhook support
--   Flask-based web application
+**Creator & Developer — Monu (Devid)**
 
-## Commands
+> **Learn the system. Understand the data. Build the tool. Use knowledge responsibly.**
 
-  Command      Purpose
-  ------------ ----------------------------
-  `/start`     Start the bot
-  `/help`      Show available commands
-  `/tg`        Telegram-related lookup
-  `/ff`        Free Fire UID lookup
-  `/ifsc`      IFSC information lookup
-  `/insta`     Instagram profile lookup
-  `/vehicle`   Vehicle information lookup
+</div>
 
-Use each command according to the prompts provided by the bot.
+<p align="center">
+  <img src="assets/cyber-osint-banner.png" alt="Cyber OSINT Banner" width="100%">
+</p>
 
-## Project Structure
+---
 
-``` text
+## 🧠 About the Creator
+
+### Monu (Devid) — Creator & Developer | Cyber Insight
+
+**Monu (Devid)** is the creator and developer behind this project, with a strong interest in **cybersecurity, OSINT, ethical research, automation, API development, and security-focused tools**.
+
+The **Cyber Insight** identity represents a continuous journey of learning, experimenting, researching, and building practical technology. The focus is on understanding how digital systems, APIs, online platforms, and information workflows operate — and turning that knowledge into useful developer projects.
+
+This project is one part of that journey: a Telegram-based OSINT utility designed around API-powered information research and automation.
+
+### ⚡ Creator's Focus
+
+- 🔎 OSINT & Digital Research
+- 🛡️ Cybersecurity & Ethical Security
+- 🤖 Telegram Bots & Automation
+- 💻 Python & API Development
+- 🧩 Developer Tools & Experiments
+- 📚 Learning, Research & Security Awareness
+
+---
+
+## 🔥 About Cyber OSINT
+
+**Cyber OSINT** is a Telegram-based OSINT utility bot that provides a simple interface for authorized information lookups through configured APIs.
+
+The project is designed to make research workflows easier by bringing multiple lookup functions into one Telegram bot.
+
+### ✨ Key Features
+
+- 🤖 Telegram bot interface
+- 🔐 Admin-controlled access
+- 🌐 Multiple API integrations
+- 📦 JSON and text response handling
+- 📄 Automatic handling of large responses
+- ⚡ Fast API requests
+- 🔗 Webhook support
+- 🐍 Python + Flask backend
+
+---
+
+## 🧰 Available Commands
+
+| Command | Purpose |
+|---|---|
+| `/start` | Start the bot |
+| `/help` | Display available commands |
+| `/tg` | Telegram-related lookup |
+| `/ff` | Free Fire UID lookup |
+| `/ifsc` | IFSC information lookup |
+| `/insta` | Instagram profile lookup |
+| `/vehicle` | Vehicle information lookup |
+
+> Available commands and API behavior depend on the configuration in `main.py`.
+
+---
+
+## 🏗️ Architecture
+
+```text
+             ┌───────────────────┐
+             │   Telegram User   │
+             └─────────┬─────────┘
+                       │
+                       ▼
+             ┌───────────────────┐
+             │   Telegram Bot    │
+             └─────────┬─────────┘
+                       │
+                       ▼
+             ┌───────────────────┐
+             │      main.py      │
+             │  Flask + Bot API  │
+             └─────────┬─────────┘
+                       │
+                       ▼
+             ┌───────────────────┐
+             │    API Layer      │
+             └─────────┬─────────┘
+                       │
+                       ▼
+             ┌───────────────────┐
+             │ Research Result   │
+             └───────────────────┘
+```
+
+---
+
+## 🛠️ Technology Stack
+
+```text
+Python
+Flask
+Telegram Bot API
+REST APIs
+Requests
+Gunicorn
+```
+
+### Project Structure
+
+```text
 Cyber-Osint/
 ├── main.py
 ├── requirements.txt
 ├── .gitignore
-└── README.md
+├── README.md
+└── assets/
+    └── cyber-osint-banner.png
 ```
 
-## Requirements
+---
 
--   Python 3
--   Telegram bot account
--   Access to the APIs used by the bot
--   Required Python packages listed in `requirements.txt`
+## 🔐 Security
 
-## Configuration
+Security is an important part of the project.
 
-Keep sensitive credentials outside the source code whenever possible.
+- Never publish your Telegram bot token.
+- Never publish API keys or private credentials.
+- Store secrets in environment variables whenever possible.
+- Do not expose private user information.
+- Keep API credentials separate from public source code.
+- Review third-party APIs before using them in production.
 
-Recommended environment variables include:
+---
 
--   `BOT_TOKEN`
--   `ADMIN_CHAT_ID`
--   `RENDER_EXTERNAL_URL`
--   API-specific configuration values used by the application
+## ⚠️ Responsible Use
 
-Do not publish bot tokens, API keys, or other private credentials in a
-public repository.
+This project is intended for **educational, research, cybersecurity awareness, and authorized OSINT purposes**.
 
-## Usage
+Only use information and services that you are legally authorized to access. Do not use this project for harassment, unauthorized surveillance, privacy violations, credential theft, fraud, or other illegal activity.
 
-Install dependencies:
+The developer does not endorse misuse of the software.
 
-``` bash
-pip install -r requirements.txt
+---
+
+## 🚀 Roadmap
+
+```text
+[x] Telegram Bot
+[x] Multiple OSINT Modules
+[x] API Integration
+[x] Admin Access Control
+[x] JSON/Text Response Handling
+[ ] More OSINT Modules
+[ ] Improved Error Handling
+[ ] Advanced Logging
+[ ] More Automation
+[ ] Web Dashboard
 ```
 
-Run the application:
+---
 
-``` bash
-python main.py
+## 📊 Project Status
+
+| Field | Details |
+|---|---|
+| Project | Cyber OSINT |
+| Creator | Monu (Devid) |
+| Identity | Cyber Insight |
+| Language | Python |
+| Platform | Telegram |
+| Status | Active Development |
+
+---
+
+## 🌐 Connect With Me
+
+Add your official links here:
+
+```text
+GitHub    : YOUR_GITHUB_LINK
+Telegram  : YOUR_TELEGRAM_LINK
+YouTube   : YOUR_YOUTUBE_LINK
+Instagram : YOUR_INSTAGRAM_LINK
+Website   : YOUR_WEBSITE_LINK
 ```
 
-For production, use a WSGI server such as Gunicorn.
+---
 
+## ❤️ Credits
 
-## 👤 About the Creator
+**Created & Developed by Monu (Devid)**
 
-### Monu (Devid) — Creator & Developer | Cyber Insight
+**Cyber Insight** — Learn • Build • Research • Secure
 
-**Monu (Devid)** is the creator and developer behind this project, with a strong interest in **cybersecurity, OSINT, ethical research, automation, and security-focused development**.
+Third-party APIs and services remain the property of their respective owners.
 
-His work focuses on building practical tools that bring together **technology, information gathering, automation, and developer-friendly workflows**. The goal is to turn complex technical ideas into useful projects that can be explored, improved, and applied for legitimate research and security purposes.
+---
 
-As a developer, Monu (Devid) is interested in understanding how digital systems, APIs, online platforms, and security workflows work together. Through projects such as this Cyber OSINT Telegram Bot, he explores ways to make information-research workflows faster and easier to use while keeping responsible and authorized use in mind.
+## 📜 Disclaimer
 
-### 🧠 Cyber Insight
+This software is provided for educational and authorized research purposes. The developer is not responsible for misuse of the software or for information obtained through third-party services.
 
-**Cyber Insight** represents the development and research mindset behind the project:
+---
 
-- 🔎 **OSINT & Digital Research**
-- 🛡️ **Cybersecurity & Ethical Security**
-- 🤖 **Automation & Telegram Bots**
-- 💻 **Python & API Development**
-- 🧩 **Developer Tools & Projects**
-- 📚 **Learning, Experimentation & Research**
+<div align="center">
 
-> **Creator:** Monu (Devid)  
-> **Role:** Developer & Creator  
-> **Focus:** Cyber Insight • OSINT • Cybersecurity • Development • Automation
+### ☠️ Cyber Insight
 
-This project is part of Monu (Devid)'s ongoing journey of learning, building, and experimenting with cybersecurity and developer technologies.
+**Built with curiosity. Driven by code. Focused on responsible research.**
 
-### ⚡ Creator's Vision
+**© Monu (Devid)**
 
-> **“Learn the system. Understand the data. Build the tool. Use knowledge responsibly.”**
-
-The aim is not simply to create software, but to keep learning how modern digital systems work and build tools that are useful for **authorized research, education, and cybersecurity awareness**.
-
-## Security
-
-This project should only be used for lawful and authorized
-OSINT/research purposes.
-
-Do not use the bot to access, collect, expose, or distribute private
-information without authorization. Respect applicable laws, platform
-policies, and the privacy of individuals.
-
-## Disclaimer
-
-This project is provided for educational, research, and authorized
-security/OSINT purposes. The developer is not responsible for misuse of
-the software or information obtained through third-party services.
-
-## License
-
-Add an appropriate license before distributing this project publicly.
+</div>
