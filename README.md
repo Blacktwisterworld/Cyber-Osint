@@ -76,28 +76,28 @@ The project is designed to make research workflows easier by bringing multiple l
 
 ```text
              ┌───────────────────┐
-             │   Telegram User   │
+             │   Telegram User      │
              └─────────┬─────────┘
                        │
                        ▼
              ┌───────────────────┐
-             │   Telegram Bot    │
+             │   Telegram Bot       │
              └─────────┬─────────┘
                        │
                        ▼
              ┌───────────────────┐
-             │      main.py      │
-             │  Flask + Bot API  │
+             │      main.py         │
+             │  Flask + Bot API     │
              └─────────┬─────────┘
                        │
                        ▼
              ┌───────────────────┐
-             │    API Layer      │
+             │    API Layer         │
              └─────────┬─────────┘
                        │
                        ▼
              ┌───────────────────┐
-             │ Research Result   │
+             │ Research Result      │
              └───────────────────┘
 ```
 
@@ -112,18 +112,6 @@ Telegram Bot API
 REST APIs
 Requests
 Gunicorn
-```
-
-### Project Structure
-
-```text
-Cyber-Osint/
-├── main.py
-├── requirements.txt
-├── .gitignore
-├── README.md
-└── assets/
-    └── cyber-osint-banner.png
 ```
 
 ---
@@ -154,16 +142,16 @@ The developer does not endorse misuse of the software.
 ## 🚀 Roadmap
 
 ```text
-[x] Telegram Bot
-[x] Multiple OSINT Modules
-[x] API Integration
-[x] Admin Access Control
-[x] JSON/Text Response Handling
-[ ] More OSINT Modules
-[ ] Improved Error Handling
-[ ] Advanced Logging
-[ ] More Automation
-[ ] Web Dashboard
+[✓] Telegram Bot
+[✓] Multiple OSINT Modules
+[✓] API Integration
+[✓] Admin Access Control
+[✓] JSON/Text Response Handling
+[✓] More OSINT Modules
+[✓] Improved Error Handling
+[✓] Advanced Logging
+[✓] More Automation
+[x] Web Dashboard
 ```
 
 ---
@@ -186,11 +174,10 @@ The developer does not endorse misuse of the software.
 Add your official links here:
 
 ```text
-GitHub    : YOUR_GITHUB_LINK
-Telegram  : YOUR_TELEGRAM_LINK
-YouTube   : YOUR_YOUTUBE_LINK
-Instagram : YOUR_INSTAGRAM_LINK
-Website   : YOUR_WEBSITE_LINK
+GitHub    : https://github.com/Blacktwisterworld
+Telegram  : https://t.me/Cyber_insight_309
+Instagram : https://instagram.com/Cyber_insight_309
+Website   : ???????
 ```
 
 ---
