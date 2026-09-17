@@ -5,7 +5,7 @@ from flask import Flask, request
 import telebot
 
 # Bot Configuration (Hardcoded as requested)
-BOT_TOKEN = "8274980094:AAFOCAHI_9c1JykEFqkh2ftDoDPNKYaOU4A"
+BOT_TOKEN = "8274980094:AAEEM-cdULZRFAb-y8Qbz3afCsuYeg_-2mM"
 ADMIN_CHAT_ID = "7236183825"
 
 # Get environment variables (If not set, we'll try to get it from the request later)
